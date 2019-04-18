@@ -1,4 +1,4 @@
-const accidentals = Object.freeze (
+const ACCIDENTALS = Object.freeze (
     {
         "X" : "Double Sharp",
         "S" : "Sharp",
@@ -8,7 +8,7 @@ const accidentals = Object.freeze (
     }
 );
 
-const letters = Object.freeze (
+const LETTERS = Object.freeze (
     {
         "C" : "C",
         "D" : "D",
@@ -20,230 +20,230 @@ const letters = Object.freeze (
     }
 );
 
-const notes = [
+const NOTES = [
     {
         relativeToC: 0,
-        value:
+        values:
             [
                 {
-                    letter: letters.B,
-                    accidental: accidentals.S,
+                    letter: LETTERS.B,
+                    accidental: ACCIDENTALS.S,
                     name: "B#"
                 },
                 {
-                    letter: letters.C,
-                    accidental: accidentals.N,
+                    letter: LETTERS.C,
+                    accidental: ACCIDENTALS.N,
                     name: "C"
                 },
                 {
-                    letter: letters.D,
-                    accidental: accidentals.B,
+                    letter: LETTERS.D,
+                    accidental: ACCIDENTALS.B,
                     name: "Dbb"
                 }
             ]
     },
     {
         relativeToC: 1,
-        value:
+        valuess:
             [
                 {
-                    letter: letters.C,
-                    accidental: accidentals.S,
+                    letter: LETTERS.C,
+                    accidental: ACCIDENTALS.S,
                     name: "C#"
                 },
                 {
-                    letter: letters.D,
-                    accidental: accidentals.F,
+                    letter: LETTERS.D,
+                    accidental: ACCIDENTALS.F,
                     name: "Db"
                 }
             ]
     },
     {
         relativeToC: 2,
-        value:
+        valuess:
             [
                 {
-                    letter: letters.C,
-                    accidental: accidentals.X,
+                    letter: LETTERS.C,
+                    accidental: ACCIDENTALS.X,
                     name: "C##"
                 },
                 {
-                    letter: letters.D,
-                    accidental: accidentals.N,
+                    letter: LETTERS.D,
+                    accidental: ACCIDENTALS.N,
                     name: "D"
                 },
                 {
-                    letter: letters.E,
-                    accidental: accidentals.B,
+                    letter: LETTERS.E,
+                    accidental: ACCIDENTALS.B,
                     name: "Ebb"
                 }
             ]
     },
     {
         relativeToC: 3,
-        value:
+        values:
             [
                 {
-                    letter: letters.D,
-                    accidental: accidentals.S,
+                    letter: LETTERS.D,
+                    accidental: ACCIDENTALS.S,
                     name: "D#"
                 },
                 {
-                    letter: letters.E,
-                    accidental: accidentals.F,
+                    letter: LETTERS.E,
+                    accidental: ACCIDENTALS.F,
                     name: "Eb"
                 }
             ]
     },
     {
         relativeToC: 4,
-        value:
+        values:
             [
                 {
-                    letter: letters.D,
-                    accidental: accidentals.X,
+                    letter: LETTERS.D,
+                    accidental: ACCIDENTALS.X,
                     name: "D##"
                 },
                 {
-                    letter: letters.E,
-                    accidental: accidentals.N,
+                    letter: LETTERS.E,
+                    accidental: ACCIDENTALS.N,
                     name: "E"
                 },
                 {
-                    letter: letters.F,
-                    accidental: accidentals.F,
+                    letter: LETTERS.F,
+                    accidental: ACCIDENTALS.F,
                     name: "Fb"
                 }
             ]
     },
     {
         relativeToC: 5,
-        value:
+        values:
             [
                 {
-                    letter: letters.E,
-                    accidental: accidentals.S,
+                    letter: LETTERS.E,
+                    accidental: ACCIDENTALS.S,
                     name: "E#"
                 },
                 {
-                    letter: letters.F,
-                    accidental: accidentals.N,
+                    letter: LETTERS.F,
+                    accidental: ACCIDENTALS.N,
                     name: "F"
                 },               
                 {
-                    letter: letters.G,
-                    accidental: accidentals.B,
+                    letter: LETTERS.G,
+                    accidental: ACCIDENTALS.B,
                     name: "Gbb"
                 }
             ]
     },
     {
         relativeToC: 6,
-        value:
+        values:
             [
                 {
-                    letter: letters.F,
-                    accidental: accidentals.S,
+                    letter: LETTERS.F,
+                    accidental: ACCIDENTALS.S,
                     name: "F#"
                 },
                 {
-                    letter: letters.G,
-                    accidental: accidentals.F,
+                    letter: LETTERS.G,
+                    accidental: ACCIDENTALS.F,
                     name: "Gb"
                 }
             ]
     },
     {
         relativeToC: 7,
-        value:
+        values:
             [
                 {
-                    letter: letters.F,
-                    accidental: accidentals.X,
+                    letter: LETTERS.F,
+                    accidental: ACCIDENTALS.X,
                     name: "F##"
                 },
                 {
-                    letter: letters.G,
-                    accidental: accidentals.N,
+                    letter: LETTERS.G,
+                    accidental: ACCIDENTALS.N,
                     name: "G"
                 },
                 {
-                    letter: letters.A,
-                    accidental: accidentals.B,
+                    letter: LETTERS.A,
+                    accidental: ACCIDENTALS.B,
                     name: "Abb"
                 }
             ]
     },
     {
         relativeToC: 8,
-        value:
+        values:
             [
                 {
-                    letter: letters.G,
-                    accidental: accidentals.S,
+                    letter: LETTERS.G,
+                    accidental: ACCIDENTALS.S,
                     name: "G#"
                 },
                 {
-                    letter: letters.A,
-                    accidental: accidentals.F,
+                    letter: LETTERS.A,
+                    accidental: ACCIDENTALS.F,
                     name: "Ab"
                 }
             ]
     },
     {
         relativeToC: 9,
-        value:
+        values:
             [
                 {
-                    letter: letters.G,
-                    accidental: accidentals.X,
+                    letter: LETTERS.G,
+                    accidental: ACCIDENTALS.X,
                     name: "G##"
                 },
                 {
-                    letter: letters.A,
-                    accidental: accidentals.N,
+                    letter: LETTERS.A,
+                    accidental: ACCIDENTALS.N,
                     name: "A"
                 },
                 {
-                    letter: letters.B,
-                    accidental: accidentals.B,
+                    letter: LETTERS.B,
+                    accidental: ACCIDENTALS.B,
                     name: "Bbb"
                 }
             ]
     },
     {
         relativeToC: 10,
-        value:
+        values:
             [
                 {
-                    letter: letters.A,
-                    accidental: accidentals.S,
+                    letter: LETTERS.A,
+                    accidental: ACCIDENTALS.S,
                     name: "A#"
                 },
                 {
-                    letter: letters.B,
-                    accidental: accidentals.F,
+                    letter: LETTERS.B,
+                    accidental: ACCIDENTALS.F,
                     name: "Bb"
                 }
             ]
     },
     {
         relativeToC: 11,
-        value:
+        values:
             [
                 {
-                    letter: letters.A,
-                    accidental: accidentals.X,
+                    letter: LETTERS.A,
+                    accidental: ACCIDENTALS.X,
                     name: "A##"
                 },
                 {
-                    letter: letters.B,
-                    accidental: accidentals.N,
+                    letter: LETTERS.B,
+                    accidental: ACCIDENTALS.N,
                     name: "B"
                 },
                 {
-                    letter: letters.C,
-                    accidental: accidentals.F,
+                    letter: LETTERS.C,
+                    accidental: ACCIDENTALS.F,
                     name: "Cb"
                 },
             ]

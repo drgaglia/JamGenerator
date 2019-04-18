@@ -7,6 +7,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="js/notes.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/scales.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-light bg-dark">
@@ -37,25 +38,38 @@
             </form>
         </div>
     </nav>
-    <div id="main-panel">
+    <div id="select-panel">
         <div id="key-div">
             <label for="key-label">Select Key:</label>
-            <select class="music-select" name="key-select" id="key-select">
-                <option value="0">A</option>
-                <option value="2">B</option>
-                <option value="4" selected="selected">C</option>
-                <option value="5">D</option>
-                <option value="7">E</option>
-                <option value="9">F</option>
-                <option value="11">G</option>
+            <select class="music-select" name="key-select" id="key-select" onchange="updateKey ();">
+                <option value="9">A</option>
+                <option value="11">B</option>
+                <option value="0" selected="selected">C</option>
+                <option value="2">D</option>
+                <option value="4">E</option>
+                <option value="5">F</option>
+                <option value="7">G</option>
             </select>
             <label for="acdntl-label">Accidental:</label>
-            <select class="music-select" name="acdntl-select" id="acdntl-select">
+            <select class="music-select" name="acdntl-select" id="acdntl-select" onchange="updateKey ();">
                 <option value="0"></option>
                 <option value="1">#</option>
                 <option value="-1">b</option>
             </select>
+            <label for="mode-label">Select Scale:</label>
+            <select class="music-select" name="mode-select" id="mode-select" onchange="">
+                <option value="0">Major (Ionian)</option>
+                <option value="1">Dorian</option>
+                <option value="2">Phrygian</option>
+                <option value="3">Lydian</option>
+                <option value="4">Mixolydian</option>
+                <option value="5">Minor (Aeolian)</option>
+                <option value="6">Locrian</option>
+            </select>
         </div>
+    </div>
+    <div id="display-div">
+        <p id="scale-display"></p>
         <canvas id="main-canvas"></canvas>
     </div>
 </body>
