@@ -1,55 +1,53 @@
 let modes = [];
 
 window.onload = function () {
-    let canvas = document.getElementById ( "main-canvas" );
-    let ctx = canvas.getContext ( "2d" );
+    var canvas = document.getElementById("main-canvas");
+    var ctx = canvas.getContext("2d");
 
-    ctx.fillStyle = "#A4A4A4";
-    ctx.fillRect ( 50, 50, 100, 100 );
+    ctx.fillStyle = "#FFF";
+    ctx.fillRect(50, 50, 100, 100);
 
-    
+    var keySelect = document.getElementById ( "key-select" );
+    var acdntlSelect = document.getElementById ( "acdntl-select" );
+    var keyValue = parseInt ( keySelect.options [ keySelect.selectedIndex ].value ); 
+    var acdntlVal = parseInt ( acdntlSelect.options [ acdntlSelect.selectedIndex ].value );
 
-    updateKey ();
-
-    /*
-    let keySelect = document.getElementById ( "key-select" );
-    let acdntlSelect = document.getElementById ( "acdntl-select" );
-    let keyVal = parseInt (keySelect.options [ keySelect.selectedIndex ].value ); 
-    let acdntlVal = parseInt (acdntlSelect.options [ acdntlSelect.selectedIndex ].value );
-
-    let relativeToC = keyVal + acdntlVal;
-
-    */
-    
+    var relativeToC = keyValue + acdntlVal;
 }
-
 
 function updateKey () {
 
-    // Get our elements
-    let keySelect, acdntlSelect, modeSelect; 
+    // Get elements
+    let keySelect = document.getElementById ( "key-select" );
+    let keyOption = keySelect.options [ keySelect.selectedIndex ];
 
-    keySelect = document.getElementById ( "key-select" );
-    acdntlSelect = document.getElementById ( "acdntl-select" );
-    modeSelect = document.getElementById ( "mode-select" );
+    let acdntlSelect = document.getElementById ( "acdntl-select" );
+    let acdntlOption = acdntlSelect.options [ acdntlSelect.selectedIndex ];
 
-    // Get our elements' values
-    let keyVal, keyText, acdntlVal, modeVal, modeText;
+    let modeSelect = document.getElementById ( "mode-select" );
+    let modeOption = modeSelect.options [ modeSelect.selectedIndex ];
 
-    keyVal = parseInt ( keySelect.value );
-    keyText = keySelect.text;
-    acdntlVal = parseInt ( acdntlSelect.value );
-    modeVal = parseInt ( modeSelect.value );
-    modeText = modeSelect.text;
+    // Get data
+    let keyValue = parseInt ( keyOption.value ) + parseInt ( acdntlOption.value );
+    let parentScale = modeOption.className;
+    let modeNumber = parseInt ( modeOption.value );
+    let modeName = keyOption.text + acdntlOption.text + " " + modeOption.text
 
-    // 
-    keyVal += acdntlVal;
-    let modeName = keyText + modeText;
+    switch ( parentScale ) {
+        case PARENT_SCALES.Ionian.name:    
+            modes.push (
+                new Mode ( keyValue, PARENT_SCALES.Ionian, modeNumber, modeName )
+            );
+            break;
+        case PARENT_SCALES.HarmonicMinor.name:
 
-    modes.push (
-        new Mode ( PARENT_SCALES.Ionian, modeVal, modeName)
-    );
+            break;
+        default:
+            console.log ( "Something went wrong" );
+            break;
+    }
 
-    document.getElementById ( "scale-display" ).innerHTML = modes[modes.length - 1].steps;
+    console.log ( modes );
 }
+
 
