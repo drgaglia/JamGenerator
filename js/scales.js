@@ -21,21 +21,57 @@ const TONICITIES = Object.freeze (
     }
 );
 
+const PARENT_SCALES = Object.freeze (
+    {
+        "Ionian" :
+        {
+            name: "Ionian",
+            steps:
+            [ 
+                STEPS.W,
+                STEPS.W,
+                STEPS.H,
+                STEPS.W,
+                STEPS.W,
+                STEPS.W,
+                STEPS.H    
+            ]
+        }       
+    },
+    {
+        "HarmonicMinor" :
+        {
+            name: "Harmonic Minor",
+            steps:
+            [
+                STEPS.W,
+                STEPS.H,
+                STEPS.W,
+                STEPS.W,
+                STEPS.H,
+                STEPS.T,
+                STEPS.H
+            ]
+        }
+    }
+);
+
 class Mode {
 
-    constructor ( parent, modeNumber, name ) {
-        this.parent = parent;
+    constructor ( keyValue, parent, modeNumber, modeName ) {
+        this.keyValue = keyValue;
+        this.parent = parent;     
+        this.tonicity = this.parent.steps.length;  
         this.modeNumber = modeNumber;
-        this.name = name;
+        this.modeName = modeName;
         this.steps = [];
         this.createMode ();
     }
 
     createMode () {
-        let tonicity = this.parent.length;
-        for ( let i = 0; i < tonicity; i++ ) {
-            let degree = ( i + this.modeNumber ) % tonicity;           
-            switch ( PARENT_SCALES.Ionian[degree] ) {
+        for ( let i = 0; i < this.tonicity; i++ ) {
+            let degree = ( i + this.modeNumber ) % this.tonicity;           
+            switch ( PARENT_SCALES.Ionian.steps[degree] ) {
                 case 1:
                     this.steps.push ( STEPS.H );
                     break;
@@ -51,28 +87,3 @@ class Mode {
         }
     }
 }
-
-const PARENT_SCALES = Object.freeze (
-    {
-        "Ionian" :
-        [ 
-            STEPS.W,
-            STEPS.W,
-            STEPS.H,
-            STEPS.W,
-            STEPS.W,
-            STEPS.W,
-            STEPS.H    
-        ],
-        "Harmonic Minor" :
-        [
-            STEPS.W,
-            STEPS.H,
-            STEPS.W,
-            STEPS.W,
-            STEPS.H,
-            STEPS.T,
-            STEPS.H
-        ]
-    }
-);
