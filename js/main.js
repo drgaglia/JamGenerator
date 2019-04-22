@@ -1,5 +1,6 @@
 let modes = [];
 
+// Dummy data for onload function - will eventually do something useful
 window.onload = function () {
     var canvas = document.getElementById("main-canvas");
     var ctx = canvas.getContext("2d");

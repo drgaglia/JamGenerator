@@ -1,77 +1,29 @@
-const STEPS = Object.freeze (
-    {
-        "H" : 1,
-        "W" : 2,
-        "T" : 3
+class ScaleDegree {
+    constructor ( degree, name, accidental, relativeToC) {
+        this.degree = degree;
+        this.name = name;
+        this.accidental = accidental;
+        this.relativeToC = relativeToC;
     }
-);
-
-// Unneeded (for now)
-const TONICITIES = Object.freeze (
-    {
-    //  "Quartatonic" : 4
-        "Pentatonic" : 5,
-        "Hexatonic" : 6,
-        "Diatonic" : 7,
-        "Octatonic" : 8,
-    //  "Nonatonic" : 9,
-    //  "Decatonic" : 10,
-    //  "Undecatonic" : 11,
-        "Chromatic" : 12
-    }
-);
-
-const PARENT_SCALES = Object.freeze (
-    {
-        "Ionian" :
-        {
-            name: "Ionian",
-            steps:
-            [ 
-                STEPS.W,
-                STEPS.W,
-                STEPS.H,
-                STEPS.W,
-                STEPS.W,
-                STEPS.W,
-                STEPS.H    
-            ]
-        }       
-    },
-    {
-        "HarmonicMinor" :
-        {
-            name: "Harmonic Minor",
-            steps:
-            [
-                STEPS.W,
-                STEPS.H,
-                STEPS.W,
-                STEPS.W,
-                STEPS.H,
-                STEPS.T,
-                STEPS.H
-            ]
-        }
-    }
-);
+}
 
 class Mode {
 
-    constructor ( keyValue, parent, modeNumber, modeName ) {
-        this.keyValue = keyValue;
-        this.parent = parent;     
-        this.tonicity = this.parent.steps.length;  
+    constructor ( parent, modeNumber, name ) {
+        this.parent = parent;
         this.modeNumber = modeNumber;
-        this.modeName = modeName;
+        this.name = name;
         this.steps = [];
+        this.notes = [];
         this.createMode ();
+        this.getNotes ();
     }
 
     createMode () {
-        for ( let i = 0; i < this.tonicity; i++ ) {
-            let degree = ( i + this.modeNumber ) % this.tonicity;           
-            switch ( PARENT_SCALES.Ionian.steps[degree] ) {
+        let tonicity = this.parent.length;
+        for ( let i = 0; i < tonicity; i++ ) {
+            let degree = ( i + this.modeNumber ) % tonicity;           
+            switch ( PARENT_SCALES.Ionian[degree] ) {
                 case 1:
                     this.steps.push ( STEPS.H );
                     break;
@@ -86,4 +38,33 @@ class Mode {
             }              
         }
     }
+
+    getNotes () {
+        
+    }
 }
+
+const PARENT_SCALES = Object.freeze (
+    {
+        "Ionian" :
+        [ 
+            STEPS.W,
+            STEPS.W,
+            STEPS.H,
+            STEPS.W,
+            STEPS.W,
+            STEPS.W,
+            STEPS.H    
+        ],
+        "Harmonic Minor" :
+        [
+            STEPS.W,
+            STEPS.H,
+            STEPS.W,
+            STEPS.W,
+            STEPS.H,
+            STEPS.T,
+            STEPS.H
+        ]
+    }
+);
