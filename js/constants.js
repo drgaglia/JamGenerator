@@ -325,4 +325,94 @@ const NOTES = [
             B: {}
         }
     }
-]
+];
+
+// Hardcoded parent scales for 'normal' diatonic modes
+// TODO: Add Harmonic Major, Hungarian Minor, Neapolitan scales, etc
+// TODO: Add sub-object in modes for alterate names (e.g. Mixolydian b6 / "Hindu")
+const PARENT_SCALES = [   
+    {
+        name: "Ionian",
+        steps: [ 
+            STEPS.W,
+            STEPS.W,
+            STEPS.H,
+            STEPS.W,
+            STEPS.W,
+            STEPS.W,
+            STEPS.H    
+        ],
+        modes: [
+            "Ionian",
+            "Dorian",
+            "Phrygian",
+            "Lydian",
+            "Mixolydian",
+            "Aeolian",
+            "Locrian" 
+        ]
+    },
+    {
+        name: "Harmonic Minor",
+        steps: [
+            STEPS.W,
+            STEPS.H,
+            STEPS.W,
+            STEPS.W,
+            STEPS.H,
+            STEPS.T,
+            STEPS.H
+        ],
+        modes: [
+            "Harmonic Minor",
+            "Locrian #6",
+            "Ionian #5",
+            "Dorian #4",
+            "Phrygian Dominant",
+            "Lydian #9",
+            "Super Locrian bb7"
+        ]
+    },
+    {
+        name: "Melodic Minor",
+        steps: [
+            STEPS.W,
+            STEPS.H,
+            STEPS.W,
+            STEPS.W,
+            STEPS.W,
+            STEPS.W,
+            STEPS.H
+        ],
+        modes: [
+            "Melodic Minor",
+            "Dorian b2",
+            "Lydian #5",
+            "Lydian Dominant",
+            "Mixolydian b6",
+            "Locrian #2",
+            "Super Locrian"
+        ]
+    },
+    {
+        name: "Hungarian Minor",
+        steps: [
+            STEPS.W,
+            STEPS.H,
+            STEPS.T,
+            STEPS.H,
+            STEPS.H,
+            STEPS.T,
+            STEPS.H
+        ],
+        modes: [
+            "Hungarian Minor",
+            "Oriental",
+            "Ionian #2 #5",
+            "Locrian bb3 bb7",
+            "Double Harmonic",
+            "Lydian #2 #6",
+            "Altered bb7"
+        ]
+    },
+];
