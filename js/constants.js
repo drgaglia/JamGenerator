@@ -2,24 +2,24 @@
 // already contains a pitch with a given letter
 const LETTERS = Object.freeze (
     {
-        "C" : "C",
-        "D" : "D",
-        "E" : "E",
-        "F" : "F",
-        "G" : "G",
-        "A" : "A",
-        "B" : "B"
+        "C" : 0,
+        "D" : 2,
+        "E" : 4,
+        "F" : 5,
+        "G" : 7,
+        "A" : 9,
+        "B" : 11
     }
 );
 
 // Accidental values
 const ACCIDENTALS = Object.freeze (
     {
-        "X" : "Double Sharp",
-        "S" : "Sharp",
-        "N" : "Natural",
-        "F" : "Flat",
-        "B" : "Double Flat"
+        "X" :  2,
+        "S"  :  1,
+        "N"  :  0,
+        "F"  : -1,
+        "B" : -2
     }
 );
 
@@ -37,297 +37,145 @@ const STEPS = Object.freeze (
 const TONICITIES = Object.freeze (
     {
     //  "Quartatonic" : 4
-        "Pentatonic" : 5,
-        "Hexatonic" : 6,
-        "Diatonic" : 7,
-        "Octatonic" : 8,
-    //  "Nonatonic" : 9,
-    //  "Decatonic" : 10,
+        "Pentatonic"  : 5,
+        "Hexatonic"   : 6,
+        "Diatonic"    : 7,
+        "Octatonic"   : 8,
+    //  "Nonatonic"   : 9,
+    //  "Decatonic"   : 10,
     //  "Undecatonic" : 11,
-        "Chromatic" : 12
+        "Chromatic"   : 12
     }
 );
 
 /* 
- *  Notes object. Each element of notes represents all notes enharmonic
- *  to their indeces relative distance to C in semitones, i.e. :
- *
- *      NOTES[0] -> B#, C, Dbb (Enharmonic with 0 semitone distance to C)
- *      NOTES[6] -> F#, Gb (Enharmonic with 6 semitone distance to C )
- *
- *  flags: five element array to denote what enharmonic accidentals occupy
- *  the same pitch, i.e. :
+ *  NOTES Array. Each element represents the set of notes enharmonic to that distance
+ *  relative to C. This is represented as an array of 5 elements, for the 5 possible 
+ *  enharmonic notes for a given distance (from double-flat at [ 0 ] to double-sharp at
+ *  [ 4 ]). So,
  *      
- *      [ ##, #, nat, b, bb],
+ *      const NOTES = [
+ *          [ 
+ *              bb,
+ *              b,
+ *              natural,
+ *              #,
+ *              ##  
+ *          ]
+ *      ]
+ *  
+ *  All notes have either 2 or 3 enharmonics:
+ *              
+ *                   bb  b  n  #  ##
+ *  All black keys: [ 0, 1, 0, 1, 0 ]
+ *         A, D, G: [ 1, 0, 1, 0, 1 ]
+ *            E, B: [ 0, 1, 1, 0, 1 ]
+ *            C, F: [ 1, 0, 1, 1, 0 ]
  * 
- *  so,
+ *  So the arrays will have values where the notes have enharmonics, and null where they do not
  *
- *      NOTES[0].flags -> [ 0, 1, 1, 0, 1 ]
- * 
- *  means the pitch has enharmonic sharp, natural, and double-flat representations,
- *  but not a double-sharp or flat
- * 
  */
 const NOTES = [
-    {
-        flags: [ 0, 1, 1, 0, 1 ],
-        values: 
-        {
-            X: {},
-            S: {
-                letter: LETTERS.B,
-                accidental: ACCIDENTALS.S,
-                name: "B#"
-            },
-            N: {
-                letter: LETTERS.C,
-                accidental: ACCIDENTALS.N,
-                name: "C"
-            },
-            F: {},
-            B: {
-                letter: LETTERS.D,
-                accidental: ACCIDENTALS.B,
-                name: "Dbb"
-            }
-        }       
-    },
-    {
-        flags: [ 0, 1, 0, 1, 0 ],
-        values:
-        {
-            X: {},
-            S: {
-                letter: LETTERS.C,
-                accidental: ACCIDENTALS.S,
-                name: "C#"
-            },
-            N: {},
-            F: {
-                letter: LETTERS.D,
-                accidental: ACCIDENTALS.F,
-                name: "Db"
-            },
-            B: {}
-        }
-    },
-    {
-        flags: [ 1, 0, 1, 0, 1 ],
-        values:
-        {
-            X: {   
-                letter: LETTERS.C,
-                accidental: ACCIDENTALS.X,
-                name: "C##"
-            },
-            S: {},
-            N: {
-                letter: LETTERS.D,
-                accidental: ACCIDENTALS.N,
-                name: "D"
-            },
-            F: {},
-            B: {
-                letter: LETTERS.E,
-                accidental: ACCIDENTALS.B,
-                name: "Ebb"                    
-            }
-        }
-    },
-    {
-        flags: [ 0, 1, 0, 1, 0 ],
-        values:
-        {
-            X: {},
-            S: {
-                letter: LETTERS.D,
-                accidental: ACCIDENTALS.S,
-                name: "D#"
-            },
-            N: {},
-            F: {
-                letter: LETTERS.E,
-                accidental: ACCIDENTALS.F,
-                name: "Eb"
-            },
-            B: {}
-        }
-    },
-    {
-        flags: [ 1, 0, 1, 1, 0 ],
-        values:
-        {
-            X: {
-                letter: LETTERS.D,
-                accidental: ACCIDENTALS.X,
-                name: "D##"
-            },
-            S: {},
-            N: {
-                letter: LETTERS.E,
-                accidental: ACCIDENTALS.N,
-                name: "E"
-            },
-            F: {
-                letter: LETTERS.F,
-                accidental: ACCIDENTALS.F,
-                name: "Fb"
-            },
-            B: {}
-        }
-    },
-    {
-        flags: [ 0, 1, 1, 0, 1 ],
-        values:
-        {
-            X: {},
-            S: {
-                letter: LETTERS.E,
-                accidental: ACCIDENTALS.S,
-                name: "E#"
-            },
-            N: {
-                letter: LETTERS.F,
-                accidental: ACCIDENTALS.N,
-                name: "F"
-            },
-            F: {},
-            B: {
-                letter: LETTERS.G,
-                accidental: ACCIDENTALS.B,
-                name: "Gbb"
-            }
-        }
-    },
-    {
-        flags: [ 0, 1, 0, 1, 0 ],
-        values:
-        {
-            X: {},
-            S: {
-                letter: LETTERS.F,
-                accidental: ACCIDENTALS.S,
-                name: "F#"
-            },
-            N: {},
-            F: {
-                letter: LETTERS.G,
-                accidental: ACCIDENTALS.F,
-                name: "Gb"
-            },
-            B: {}
-        }
-    },
-    {
-        flags: [ 1, 0, 1, 0, 1 ],
-        values:
-        {
-            X: {
-                letter: LETTERS.F,
-                accidental: ACCIDENTALS.X,
-                name: "F##"
-            },
-            S: {},
-            N: {
-                letter: LETTERS.G,
-                accidental: ACCIDENTALS.N,
-                name: "G"
-            },
-            F: {},
-            B: {
-                letter: LETTERS.A,
-                accidental: ACCIDENTALS.B,
-                name: "Abb"
-            }
-        }
-    },
-    {
-        flags: [ 0, 1, 0, 1, 0 ],
-        values:
-        {
-            X: {},
-            S: {
-                letter: LETTERS.G,
-                accidental: ACCIDENTALS.S,
-                name: "G#"
-            },
-            N: {},
-            F: {
-                letter: LETTERS.A,
-                accidental: ACCIDENTALS.F,
-                name: "Ab"
-            },
-            B: {}
-        }
-    },
-    {
-        flags: [ 1, 0, 1, 0, 1 ],
-        values:
-        {
-            X: {
-                letter: LETTERS.G,
-                accidental: ACCIDENTALS.X,
-                name: "G##"
-            },
-            S: {},
-            N: {
-                letter: LETTERS.A,
-                accidental: ACCIDENTALS.N,
-                name: "A"
-            },
-            F: {},
-            B: {
-                letter: LETTERS.B,
-                accidental: ACCIDENTALS.B,
-                name: "Bbb"
-            }
-        }
-    },
-    {
-        flags: [ 0, 1, 0, 1, 0 ],
-        values:
-        {
-            X: {},
-            S: {
-                letter: LETTERS.A,
-                accidental: ACCIDENTALS.S,
-                name: "A#"
-            },
-            N: {},
-            F: {
-                letter: LETTERS.B,
-                accidental: ACCIDENTALS.F,
-                name: "Bb"
-            },
-            B: {}
-        }
-    },
-    {
-        flags: [ 1, 0, 1, 1, 0 ],
-        values:
-        {
-            X: {
-                letter: LETTERS.A,
-                accidental: ACCIDENTALS.X,
-                name: "A##"
-            },
-            S: {},
-            N: {
-                letter: LETTERS.B,
-                accidental: ACCIDENTALS.N,
-                name: "B"
-            },
-            F: {
-                letter: LETTERS.C,
-                accidental: ACCIDENTALS.F,
-                name: "Cb"
-            },
-            B: {}
-        }
-    }
+    // Value: 0, C
+    [
+        new Note ( LETTERS.D, ACCIDENTALS.B, "Dbb"), // bb
+        null,                                        // b
+        new Note ( LETTERS.C, ACCIDENTALS.N, "C" ),  // natural
+        new Note ( LETTERS.B, ACCIDENTALS.S, "B#" ), // #
+        null                                         // ##
+    ],
+    // Value: 1, C#/Db
+    [
+        null,
+        new Note ( LETTERS.D, ACCIDENTALS.F, "Db" ),
+        null,
+        new Note ( LETTERS.C, ACCIDENTALS.S, "C#" ),
+        null
+    ],
+    // Value: 2, D
+    [
+        new Note ( LETTERS.E, ACCIDENTALS.B, "Ebb" ),
+        null,
+        new Note ( LETTERS.D, ACCIDENTALS.N, "D" ),
+        null,
+        new Note ( LETTERS.C, ACCIDENTALS.X, "C##" )
+    ],
+    // Value: 3, D#/Eb
+    [
+        null,
+        new Note ( LETTERS.E, ACCIDENTALS.F, "Eb" ),
+        null,
+        new Note ( LETTERS.D, ACCIDENTALS.S, "D#" ),
+        null
+    ],
+    // Value: 4, E
+    [
+        null,
+        new Note ( LETTERS.F, ACCIDENTALS.F, "Fb" ),
+        new Note ( LETTERS.E, ACCIDENTALS.N, "E" ),
+        null,
+        new Note ( LETTERS.D, ACCIDENTALS.X, "D##" )
+    ],
+    // Value: 5, F
+    [
+        new Note ( LETTERS.G, ACCIDENTALS.B, "Gbb"), 
+        null,                                        
+        new Note ( LETTERS.F, ACCIDENTALS.N, "F" ),  
+        new Note ( LETTERS.E, ACCIDENTALS.S, "E#" ), 
+        null                                         
+    ],
+    // Value: 6, F#/Gb
+    [
+        null,
+        new Note ( LETTERS.G, ACCIDENTALS.F, "Gb" ),
+        null,
+        new Note ( LETTERS.F, ACCIDENTALS.S, "F#" ),
+        null
+    ],
+    // Value: 7, G
+    [
+        new Note ( LETTERS.A, ACCIDENTALS.B, "Abb" ),
+        null,
+        new Note ( LETTERS.G, ACCIDENTALS.N, "G" ),
+        null,
+        new Note ( LETTERS.F, ACCIDENTALS.X, "F##" )
+    ],
+    // Value: 8, G#/Ab
+    [
+        null,
+        new Note ( LETTERS.A, ACCIDENTALS.F, "Ab" ),
+        null,
+        new Note ( LETTERS.G, ACCIDENTALS.S, "G#" ),
+        null
+    ],
+    // Value: 9, A
+    [
+        new Note ( LETTERS.B, ACCIDENTALS.B, "Bbb" ),
+        null,
+        new Note ( LETTERS.A, ACCIDENTALS.N, "A" ),
+        null,
+        new Note ( LETTERS.G, ACCIDENTALS.X, "G##" )
+    ],
+    // Value: 10, A#/Bb
+    [
+        null,
+        new Note ( LETTERS.B, ACCIDENTALS.F, "Bb" ),
+        null,
+        new Note ( LETTERS.A, ACCIDENTALS.S, "A#" ),
+        null
+    ],
+    // Value: 11, B
+    [
+        null,
+        new Note ( LETTERS.C, ACCIDENTALS.F, "Cb" ),
+        new Note ( LETTERS.B, ACCIDENTALS.N, "B" ),
+        null,
+        new Note ( LETTERS.A, ACCIDENTALS.X, "A##" )
+    ]
 ];
-
-// Hardcoded parent scales for 'normal' diatonic modes
+    
+// Hardcoded parent scales for 'normal' diatonic modes with the parent's steps
+// And the names of all its modes
 // TODO: Add Harmonic Major, Hungarian Minor, Neapolitan scales, etc
 // TODO: Add sub-object in modes for alterate names (e.g. Mixolydian b6 / "Hindu")
 const PARENT_SCALES = [   
@@ -416,3 +264,55 @@ const PARENT_SCALES = [
         ]
     },
 ];
+
+/*
+*******************************************************************************
+    ONLY DEV BELOW ************************************************************
+    Intervals are going to require a deep dive. *******************************
+    Would rather get Notes <--> Modes <--> Scales up and running first ********
+    Most of this will probably get completely retooled ************************
+*******************************************************************************
+*/
+
+// DEV ONLY
+const QUALITIES = Object.freeze (
+    {
+        "Perfect" : 0,
+        "Minor" : -1,
+        "Major" : 0,
+        "Tritone" : 0
+    }
+);
+
+// DEV ONLY
+const INTERVAL_GROUPS = Object.freeze (
+    {
+        "Octave" : "Octave",
+        "Second" : "Second",
+        "Third" : "Third",
+        "Fourth" : "Fourth",
+        "Fifth" : "Fifth",
+        "Sixth" : "Sixth",
+        "Seventh" : "Seventh",
+        "Ninth" : "Ninth",
+        "Eleventh" : "Eleventh",
+        "Thirteenth" : "Thirteenth"
+    }
+);
+
+// DEV ONLY
+const INTERVALS = Object.freeze (
+    {
+        "Ocatve" : {
+            quality : QUALITIES.Perfect,
+            distance: 0 
+        },
+        "m2" :
+        {
+            
+        }
+        
+           
+        
+    }
+);
