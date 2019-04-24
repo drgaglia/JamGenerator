@@ -14,8 +14,7 @@ function getNote ( note ) {
             continue;
         }
 		if ( enharmonics [ i ].letter === note.letter ) {
-			console.log ( enharmonics [ i ] );
-			return;
+			return enharmonics [ i ];
         }
     }
 }
