@@ -16,9 +16,9 @@ const LETTERS = Object.freeze (
 const ACCIDENTALS = Object.freeze (
     {
         "X" :  2,
-        "S"  :  1,
-        "N"  :  0,
-        "F"  : -1,
+        "S" :  1,
+        "N" :  0,
+        "F" : -1,
         "B" : -2
     }
 );
@@ -48,132 +48,201 @@ const TONICITIES = Object.freeze (
     }
 );
 
-/* 
- *  NOTES Array. Each element represents the set of notes enharmonic to that distance
- *  relative to C. This is represented as an array of 5 elements, for the 5 possible 
- *  enharmonic notes for a given distance (from double-flat at [ 0 ] to double-sharp at
- *  [ 4 ]). So,
- *      
- *      const NOTES = [
- *          [ 
- *              bb,
- *              b,
- *              natural,
- *              #,
- *              ##  
- *          ]
- *      ]
- *  
- *  All notes have either 2 or 3 enharmonics:
- *              
- *                   bb  b  n  #  ##
- *  All black keys: [ 0, 1, 0, 1, 0 ]
- *         A, D, G: [ 1, 0, 1, 0, 1 ]
- *            E, B: [ 0, 1, 1, 0, 1 ]
- *            C, F: [ 1, 0, 1, 1, 0 ]
- * 
- *  So the arrays will have values where the notes have enharmonics, and null where they do not
- *
- */
-const NOTES = [
-    // Value: 0, C
-    [
-        new Note ( LETTERS.D, ACCIDENTALS.B, "Dbb"), // bb
-        null,                                        // b
-        new Note ( LETTERS.C, ACCIDENTALS.N, "C" ),  // natural
-        new Note ( LETTERS.B, ACCIDENTALS.S, "B#" ), // #
-        null                                         // ##
-    ],
-    // Value: 1, C#/Db
-    [
-        null,
-        new Note ( LETTERS.D, ACCIDENTALS.F, "Db" ),
-        null,
-        new Note ( LETTERS.C, ACCIDENTALS.S, "C#" ),
-        null
-    ],
-    // Value: 2, D
-    [
-        new Note ( LETTERS.E, ACCIDENTALS.B, "Ebb" ),
-        null,
-        new Note ( LETTERS.D, ACCIDENTALS.N, "D" ),
-        null,
-        new Note ( LETTERS.C, ACCIDENTALS.X, "C##" )
-    ],
-    // Value: 3, D#/Eb
-    [
-        null,
-        new Note ( LETTERS.E, ACCIDENTALS.F, "Eb" ),
-        null,
-        new Note ( LETTERS.D, ACCIDENTALS.S, "D#" ),
-        null
-    ],
-    // Value: 4, E
-    [
-        null,
-        new Note ( LETTERS.F, ACCIDENTALS.F, "Fb" ),
-        new Note ( LETTERS.E, ACCIDENTALS.N, "E" ),
-        null,
-        new Note ( LETTERS.D, ACCIDENTALS.X, "D##" )
-    ],
-    // Value: 5, F
-    [
-        new Note ( LETTERS.G, ACCIDENTALS.B, "Gbb"), 
-        null,                                        
-        new Note ( LETTERS.F, ACCIDENTALS.N, "F" ),  
-        new Note ( LETTERS.E, ACCIDENTALS.S, "E#" ), 
-        null                                         
-    ],
-    // Value: 6, F#/Gb
-    [
-        null,
-        new Note ( LETTERS.G, ACCIDENTALS.F, "Gb" ),
-        null,
-        new Note ( LETTERS.F, ACCIDENTALS.S, "F#" ),
-        null
-    ],
-    // Value: 7, G
-    [
-        new Note ( LETTERS.A, ACCIDENTALS.B, "Abb" ),
-        null,
-        new Note ( LETTERS.G, ACCIDENTALS.N, "G" ),
-        null,
-        new Note ( LETTERS.F, ACCIDENTALS.X, "F##" )
-    ],
-    // Value: 8, G#/Ab
-    [
-        null,
-        new Note ( LETTERS.A, ACCIDENTALS.F, "Ab" ),
-        null,
-        new Note ( LETTERS.G, ACCIDENTALS.S, "G#" ),
-        null
-    ],
-    // Value: 9, A
-    [
-        new Note ( LETTERS.B, ACCIDENTALS.B, "Bbb" ),
-        null,
-        new Note ( LETTERS.A, ACCIDENTALS.N, "A" ),
-        null,
-        new Note ( LETTERS.G, ACCIDENTALS.X, "G##" )
-    ],
-    // Value: 10, A#/Bb
-    [
-        null,
-        new Note ( LETTERS.B, ACCIDENTALS.F, "Bb" ),
-        null,
-        new Note ( LETTERS.A, ACCIDENTALS.S, "A#" ),
-        null
-    ],
-    // Value: 11, B
-    [
-        null,
-        new Note ( LETTERS.C, ACCIDENTALS.F, "Cb" ),
-        new Note ( LETTERS.B, ACCIDENTALS.N, "B" ),
-        null,
-        new Note ( LETTERS.A, ACCIDENTALS.X, "A##" )
-    ]
+const CHROMATIC_SCALE = [
+    // 0: C
+    new Note ( 
+        [
+            new Enharmonic ( LETTERS.D, ACCIDENTALS.B ),
+            null,
+            new Enharmonic ( LETTERS.C, ACCIDENTALS.N ),
+            new Enharmonic ( LETTERS.B, ACCIDENTALS.S ),
+            null
+        ],
+        [
+            "C0.wav",
+            "C1.wav",
+            "C2.wav",
+            "C3.wav"
+        ]
+    ),
+    // 1: Db/C#
+    new Note (
+        [
+            null,
+            new Enharmonic ( LETTERS.D, ACCIDENTALS.F ),
+            null,
+            new Enharmonic ( LETTERS.C, ACCIDENTALS.S ),
+            null
+        ],
+        [
+            "DbC#0.wav",
+            "DbC#1.wav",
+            "DbC#2.wav",
+            "DbC#3.wav"
+        ]
+    ),
+    // 2: D
+    new Note (
+        [
+            new Enharmonic ( LETTERS.E, ACCIDENTALS.B ),
+            null,
+            new Enharmonic ( LETTERS.D,  ACCIDENTALS.N ),
+            null,
+            new Enharmonic ( LETTERS.C, ACCIDENTALS.X )
+        ],
+        [
+            "D0.wav",
+            "D1.wav",
+            "D2.wav",
+            "D3.wav"
+        ]
+    ),
+    // 3: Eb/D#
+    new Note (
+        [
+            null,
+            new Enharmonic ( LETTERS.E, ACCIDENTALS.F ),
+            null,
+            new Enharmonic ( LETTERS.D, ACCIDENTALS.S ),
+            null
+        ],
+        [
+            "EbD#0.wav",
+            "EbD#1.wav",
+            "EbD#2.wav",
+            "EbD#3.wav"
+        ]
+    ),
+    // 4: E
+    new Note (
+        [
+            null,
+            new Enharmonic ( LETTERS.F, ACCIDENTALS.F ),
+            new Enharmonic (LETTERS.E, ACCIDENTALS.N ),
+            null,
+            new Enharmonic (LETTERS.D, ACCIDENTALS.X )
+        ],
+        [
+            "E0.wav",
+            "E1.wav",
+            "E2.wav",
+            "E3.wav"
+        ]
+    ),
+    // 5: F
+    new Note (
+        [
+            new Enharmonic ( LETTERS.G, ACCIDENTALS.B ),
+            null,
+            new Enharmonic ( LETTERS.F, ACCIDENTALS.N ),
+            new Enharmonic ( LETTERS.E, ACCIDENTALS.S ),
+            null
+        ],
+        [
+            "F0.wav",
+            "F1.wav",
+            "F2.wav",
+            "F3.wav"
+        ]
+    ),
+    // 6: Gb/F#
+    new Note (
+        [
+            null,
+            new Enharmonic ( LETTERS.G, ACCIDENTALS.F ),
+            null,
+            new Enharmonic ( LETTERS.F, ACCIDENTALS.S ),
+            null
+        ],
+        [
+            "GbF#0.wav",
+            "GbF#1.wav",
+            "GbF#2.wav",
+            "GbF#3.wav"
+        ]
+    ),
+    // 7: G
+    new Note (
+        [
+            new Enharmonic ( LETTERS.A, ACCIDENTALS.B ),
+            null,
+            new Enharmonic ( LETTERS.G, ACCIDENTALS.N ),
+            null,
+            new Enharmonic ( LETTERS.F, ACCIDENTALS.X )
+        ],
+        [
+            "G0.wav",
+            "G1.wav",
+            "G2.wav",
+            "G3.wav"
+        ]
+    ),
+    // 8: Ab/G#
+    new Note (
+        [
+            null,
+            new Enharmonic ( LETTERS.A, ACCIDENTALS.F ),
+            null,
+            new Enharmonic ( LETTERS.G, ACCIDENTALS.S ),
+            null
+        ],
+        [
+            "AbG#0.wav",
+            "AbG#1.wav",
+            "AbG#2.wav",
+            "AbG#3.wav"
+        ]
+    ),
+    // 9: A
+    new Note (
+        [
+            new Enharmonic ( LETTERS.B, ACCIDENTALS.B ),
+            null,
+            new Enharmonic ( LETTERS.A, ACCIDENTALS.N ),
+            null,
+            new Enharmonic ( LETTERS.G, ACCIDENTALS.X )
+        ],
+        [
+            "A0.wav",
+            "A1.wav",
+            "A2.wav",
+            "A3.wav"
+        ]
+    ),
+    // 10: Bb / A#
+    new Note (
+        [
+            null,
+            new Enharmonic ( LETTERS.B, ACCIDENTALS.F ),
+            null,
+            new Enharmonic ( LETTERS.A, ACCIDENTALS.S ),
+            null
+        ],
+        [
+            "BbA#0.wav",
+            "BbA#1.wav",
+            "BbA#2.wav",
+            "BbA#3.wav"
+        ]
+    ),
+    // 11: B
+    new Note (
+        [
+            null,
+            new Enharmonic ( LETTERS.C, ACCIDENTALS.F ),
+            new Enharmonic ( LETTERS.B, ACCIDENTALS.N ),
+            null,
+            new Enharmonic ( LETTERS.A, ACCIDENTALS.X )
+        ],
+        [
+            "B0.wav",
+            "B1.wav",
+            "B2.wav",
+            "B3.wav"
+        ]
+    ),
 ];
-    
+
 // Hardcoded parent scales for 'normal' diatonic modes with the parent's steps
 // And the names of all its modes
 // TODO: Add Harmonic Major, Hungarian Minor, Neapolitan scales, etc
@@ -264,6 +333,10 @@ const PARENT_SCALES = [
         ]
     },
 ];
+
+// container for all modes after they've been generated
+let modeFamilies = [];
+const CHROMATIC_LENGTH = CHROMATIC_SCALE.length;
 
 /*
 *******************************************************************************

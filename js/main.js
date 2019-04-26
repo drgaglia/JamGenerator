@@ -24,12 +24,11 @@ function updateKey () {
     let modeOption = modeSelect.options [ modeSelect.selectedIndex ];
 
     // Get data relative to C key value
-    let keyValue = parseInt ( keyOption.value ) + parseInt ( acdntlOption.value );
+    let letter = parseInt ( keyOption.value );
+    let accidental = parseInt ( acdntlOption.value );
     let parentScale = modeOption.className;
     let modeNumber = parseInt ( modeOption.value );
-    let modeName = keyOption.text + acdntlOption.text + " " + modeOption.text
-
-    console.table ( keyValue, parentScale, modeNumber, modeName );
+    let modeName = keyOption.text + acdntlOption.text + " " + modeOption.text;
 }
 
 

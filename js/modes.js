@@ -16,8 +16,6 @@ class Mode {
     }
 }
 
-modeFamilies = [];
-
 // Generates the modes of the PARENT_SCALES object
 function generateInitialModes () {
     for ( let i = 0; i < PARENT_SCALES.length; i++ ) {
