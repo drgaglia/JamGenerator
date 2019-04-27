@@ -1,0 +1,8 @@
+letter (int):            the distance in semitones each letter is from C (C = 0, D = 2, E = 4, F = 5, G = 7, A = 9, B = 11)
+accidental/acdntl (int): the accidental applied to the given note (B = -2, F = -1, N = 0, S = 1, X = 2)
+distance (int):          the sum <letter + accidental>, or the total distance in semitones a given note is from C (C = 0, C# = 1, ..., Bb = 10, B = 11)
+modeNumber (int):        the 0-based number of a given mode in its family (e.g. Ionian = 0, Dorian = 1, ..., Locrian = 6)
+
+<value>Select : an HTML select element
+<value>Option : an HTML option element
+

@@ -1,55 +1,34 @@
-let modes = [];
-
+// Dummy data for onload function - will eventually do something useful
 window.onload = function () {
-    let canvas = document.getElementById ( "main-canvas" );
-    let ctx = canvas.getContext ( "2d" );
+    var canvas = document.getElementById("main-canvas");
+    var ctx = canvas.getContext("2d");
 
-    ctx.fillStyle = "#A4A4A4";
-    ctx.fillRect ( 50, 50, 100, 100 );
+    ctx.fillStyle = "#FFF";
+    ctx.fillRect(50, 50, 100, 100);
 
-    
-
-    updateKey ();
-
-    /*
-    let keySelect = document.getElementById ( "key-select" );
-    let acdntlSelect = document.getElementById ( "acdntl-select" );
-    let keyVal = parseInt (keySelect.options [ keySelect.selectedIndex ].value ); 
-    let acdntlVal = parseInt (acdntlSelect.options [ acdntlSelect.selectedIndex ].value );
-
-    let relativeToC = keyVal + acdntlVal;
-
-    */
-    
+    generateInitialModes ();
 }
 
-
+// In all likelyhood, this will get retooled and removed. But it is good for
+// dummy data right now and so it shall stay
 function updateKey () {
 
-    // Get our elements
-    let keySelect, acdntlSelect, modeSelect; 
+    // Get selects and their selected options
+    let keySelect = document.getElementById ( "key-select" );
+    let keyOption = keySelect.options [ keySelect.selectedIndex ];
 
-    keySelect = document.getElementById ( "key-select" );
-    acdntlSelect = document.getElementById ( "acdntl-select" );
-    modeSelect = document.getElementById ( "mode-select" );
+    let acdntlSelect = document.getElementById ( "acdntl-select" );
+    let acdntlOption = acdntlSelect.options [ acdntlSelect.selectedIndex ];
 
-    // Get our elements' values
-    let keyVal, keyText, acdntlVal, modeVal, modeText;
+    let modeSelect = document.getElementById ( "mode-select" );
+    let modeOption = modeSelect.options [ modeSelect.selectedIndex ];
 
-    keyVal = parseInt ( keySelect.value );
-    keyText = keySelect.text;
-    acdntlVal = parseInt ( acdntlSelect.value );
-    modeVal = parseInt ( modeSelect.value );
-    modeText = modeSelect.text;
-
-    // 
-    keyVal += acdntlVal;
-    let modeName = keyText + modeText;
-
-    modes.push (
-        new Mode ( PARENT_SCALES.Ionian, modeVal, modeName)
-    );
-
-    document.getElementById ( "scale-display" ).innerHTML = modes[modes.length - 1].steps;
+    // Get data relative to C key value
+    let letter = parseInt ( keyOption.value );
+    let accidental = parseInt ( acdntlOption.value );
+    let parentScale = modeOption.className;
+    let modeNumber = parseInt ( modeOption.value );
+    let modeName = keyOption.text + acdntlOption.text + " " + modeOption.text;
 }
+
 
