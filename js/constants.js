@@ -334,9 +334,14 @@ const PARENT_SCALES = [
     },
 ];
 
+// There are 12 chromatic notes
+const CHROMATIC_LENGTH = CHROMATIC_SCALE.length;
+
 // container for all modes after they've been generated
 let modeFamilies = [];
-const CHROMATIC_LENGTH = CHROMATIC_SCALE.length;
+
+// container for all scales after they've been generated
+let scales = [];
 
 /*
 *******************************************************************************
@@ -389,3 +394,22 @@ const INTERVALS = Object.freeze (
         
     }
 );
+
+/* Intervals
+const INTERVALS = Object.freeze (
+    {
+        "R"  : 0,
+        "m2" : 1,
+        "M2" : 2,
+        "m3" : 3,
+        "M3" : 4,
+        "P4" : 5,
+        "TT" : 6,
+        "P5" : 7,
+        "m6" : 8,
+        "M6" : 9,
+        "m7" : 10,
+        "M7" : 11
+    }
+);
+*/
