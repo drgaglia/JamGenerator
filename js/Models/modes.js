@@ -7,7 +7,6 @@ class Mode {
         this.modeSteps = [];
         this.generateModeSteps ();
     }
-
     generateModeSteps () {
         let scaleLength = this.parentScale.steps.length;
         for ( let i = 0; i < scaleLength; i++ ) {          

@@ -1,7 +1,6 @@
 
 class Key {
     constructor ( keyCenter, parentScale ) {
-
         this.keyCenter = keyCenter;
         this.modeSteps = parentScale.modeSteps;
 

@@ -8,7 +8,6 @@ function generateKeyNotes ( keyCenter, modeSteps ) {
 		currentNote = ( currentNote + modeSteps [ i ] ) % CHROMATIC_LENGTH;
 		keyNotes.push ( CHROMATIC_SCALE [ currentNote ] );
     }
-
     return keyNotes.length ? keyNotes : 
         alert ( "something went wrong in generatingScaleNotes, " 
             + " also please replace this with proper error handling." );

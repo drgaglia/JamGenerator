@@ -50,6 +50,7 @@ const TONICITIES = Object.freeze (
 );
 
 const CHROMATIC_SCALE = [
+
     // 0: C
     new Note ( 
         [
@@ -66,6 +67,7 @@ const CHROMATIC_SCALE = [
             "C3.wav"
         ]
     ),
+
     // 1: Db/C#
     new Note (
         [
@@ -82,6 +84,7 @@ const CHROMATIC_SCALE = [
             "DbC#3.wav"
         ]
     ),
+
     // 2: D
     new Note (
         [
@@ -98,6 +101,7 @@ const CHROMATIC_SCALE = [
             "D3.wav"
         ]
     ),
+
     // 3: Eb/D#
     new Note (
         [
@@ -114,6 +118,7 @@ const CHROMATIC_SCALE = [
             "EbD#3.wav"
         ]
     ),
+
     // 4: E
     new Note (
         [
@@ -130,6 +135,7 @@ const CHROMATIC_SCALE = [
             "E3.wav"
         ]
     ),
+
     // 5: F
     new Note (
         [
@@ -146,6 +152,7 @@ const CHROMATIC_SCALE = [
             "F3.wav"
         ]
     ),
+
     // 6: Gb/F#
     new Note (
         [
@@ -162,6 +169,7 @@ const CHROMATIC_SCALE = [
             "GbF#3.wav"
         ]
     ),
+
     // 7: G
     new Note (
         [
@@ -178,6 +186,7 @@ const CHROMATIC_SCALE = [
             "G3.wav"
         ]
     ),
+
     // 8: Ab/G#
     new Note (
         [
@@ -194,6 +203,7 @@ const CHROMATIC_SCALE = [
             "AbG#3.wav"
         ]
     ),
+
     // 9: A
     new Note (
         [
@@ -210,6 +220,7 @@ const CHROMATIC_SCALE = [
             "A3.wav"
         ]
     ),
+
     // 10: Bb / A#
     new Note (
         [
@@ -226,6 +237,7 @@ const CHROMATIC_SCALE = [
             "BbA#3.wav"
         ]
     ),
+    
     // 11: B
     new Note (
         [
