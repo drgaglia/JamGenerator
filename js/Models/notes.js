@@ -1,3 +1,4 @@
+
 class Note {
     // Notes: bb, b, n, #, ## note names
     // pitches: wav files for pitches 

@@ -1,30 +1,17 @@
-class Key {
-    constructor ( ) {
-        this.keyCenter;
-        this.steps;
-        this.intervals;
-        this.scaleDegrees;
-        
-        this.notes;
-        this.chords;
-        this.chordFunctions;
-
-    }
-}
 
 // Builds scale notes by adding the steps of the input scale to the input tone
-function generateScaleNotes ( tonal, scale ) {
-	let scaleNotes = [];
-	let currNote = tonal.name + tonal.accidental;
-	scaleNotes.push ( CHROMATIC_SCALE [ currNote ] );
-	for ( let i = 0; i < scale.steps.length - 1; i++ ) { 
-		currNote = ( currNote + scale.steps [ i ] ) % CHROMATIC_LENGTH;
-		scaleNotes.push ( CHROMATIC_SCALE [ currNote ] );
+function generateKeyNotes ( keyCenter, modeSteps ) {
+	let keyNotes = [];
+	let currentNote = keyCenter.name + keyCenter.accidental;
+	keyNotes.push ( CHROMATIC_SCALE [ currentNote ] );
+	for ( let i = 0; i < modeSteps.length - 1; i++ ) { 
+		currentNote = ( currentNote + modeSteps [ i ] ) % CHROMATIC_LENGTH;
+		keyNotes.push ( CHROMATIC_SCALE [ currentNote ] );
     }
 
-    return scaleNotes.length ? scaleNotes : 
-        alert ( "something went wrong in generatingScaleNotes" + 
-            " also please replace this with proper error handling.");
+    return keyNotes.length ? keyNotes : 
+        alert ( "something went wrong in generatingScaleNotes, " 
+            + " also please replace this with proper error handling." );
 }
 
 /*
@@ -57,17 +44,16 @@ function generateScaleNotes ( tonal, scale ) {
  * This should result in 17 scales for each mode - 7 for the naturals (CDEFGAB), 5 for the
  * sharps (CDFGA), and 5 for the flats (DEGAB)
  */
-function generateAllScales ( scale ) {
-    let count = 0;
+function generateAllKeysForScale ( modeSteps ) {
     for ( let i = 0; i < CHROMATIC_LENGTH; i++ ) {
         for ( let j = 1; j < Object.entries ( ACCIDENTALS ).length - 1; j++ ) {
-            let enharm = CHROMATIC_SCALE [ i ].enharmonics [ j ];
-            if ( enharm
-                && !(enharm.name === LETTERS.C && enharm.accidental === ACCIDENTALS.F)
-                && !(enharm.name === LETTERS.F && enharm.accidental === ACCIDENTALS.F)
-                && !(enharm.name === LETTERS.B && enharm.accidental === ACCIDENTALS.S)
-                && !(enharm.name === LETTERS.E && enharm.accidental === ACCIDENTALS.S)) {
-                generateScaleNotes ( enharm, scale );
+            let keyCenter = CHROMATIC_SCALE [ i ].enharmonics [ j ];
+            if ( keyCenter
+                && ! ( keyCenter.name === LETTERS.C && keyCenter.accidental === ACCIDENTALS.F )
+                && ! ( keyCenter.name === LETTERS.F && keyCenter.accidental === ACCIDENTALS.F )
+                && ! ( keyCenter.name === LETTERS.B && keyCenter.accidental === ACCIDENTALS.S )
+                && ! ( keyCenter.name === LETTERS.E && keyCenter.accidental === ACCIDENTALS.S ) ) {
+                generateKeyNotes ( keyCenter, modeSteps );
             }
         }
     }

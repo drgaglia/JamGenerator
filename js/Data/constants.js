@@ -1,3 +1,4 @@
+
 // Letter names for notes. Used to determine whether a scale
 // already contains a pitch with a given letter
 const LETTERS = Object.freeze (
@@ -338,7 +339,7 @@ const PARENT_SCALES = [
 const CHROMATIC_LENGTH = CHROMATIC_SCALE.length;
 
 // container for all modes after they've been generated
-let modeFamilies = [];
+let modeGroups = [];
 
 // container for all scales after they've been generated
 let scales = [];

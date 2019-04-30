@@ -1,12 +1,13 @@
+
 // Dummy data for onload function - will eventually do something useful
-window.onload = function () {
+function initializeUI () {
     var canvas = document.getElementById("main-canvas");
     var ctx = canvas.getContext("2d");
 
     ctx.fillStyle = "#FFF";
     ctx.fillRect(50, 50, 100, 100);
 
-    generateInitialModes ();
+    // generateInitialModes ();
 }
 
 // In all likelyhood, this will get retooled and removed. But it is good for
@@ -30,5 +31,3 @@ function updateKey () {
     let modeNumber = parseInt ( modeOption.value );
     let modeName = keyOption.text + acdntlOption.text + " " + modeOption.text;
 }
-
-
