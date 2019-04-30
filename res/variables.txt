@@ -1,3 +1,92 @@
+Stylistic Formatting Conventions:
+    - In general, I try to maximize horizontal (in-line) space where I can, and minimize vertical space where I can.
+      I do this this purely because it is easier for me personally to read. So, my style throughout this project is 
+      as follows:
+
+        1.  Tabs equal 4 spaces
+
+        2.  Parenthesis: always a space before and after, except where they are empty, in which case the parenthesis touch.
+            Opening parenthesis inline with associated process, closing inline with the end of said process.
+                ex: 
+                    function example ( arg ) {
+                        if ( arg ) {
+                            arg = ( arg + 1 ) * 2;
+                        } else {
+                            anotherFunction ();
+                        }
+                    }
+        
+        3.  Square Brackets: same as (1).
+                ex:
+                    let array = [ 1, 2, 3, 4, 5 ];
+                    for ( let i = 0; i <array.lenth; i++ ) {
+                        console.log ( array [ i ] );
+                    }
+                    array = [];
+
+        4.  Curly Brackets: opening always inline with the associated function/block, closing on a new line, except when hard-coding an
+            object, then they go on a new line.
+                ex:
+                    class Class {
+                        constructor () {
+                            let array = [
+                                {
+                                    age: "21",
+                                    sex: "female",
+                                    location: "Akron"
+                                },
+                                {
+                                    age: "56",
+                                    sex: "\"female\"",
+                                    location: "Ohio State Correctional"
+                                }
+                            ];
+                        }
+                    }
+        
+        5.  Operators: always surrounded by a space.
+                ex:
+                    let a = 10;
+                    let b = 20;
+                    let c = ( a * b ) % 2 === 0 ? "wow" : "cool";
+
+        6.  Semicolons: no space before
+                ex:
+                    let a = 10;
+
+        7:  Case: variables and functions are always written in camelCase, class names are always written in TitleCase. const variables
+            are always written in UPPER_SNAKE_CASE. HTML attributes are written in all-lower-kebab-case.
+
+        8.  Line breaks: no hard limit on line length but I generally make a new line at 90-100 ish characters. New lines are
+            always indented by 1 tab from the margin of the current block, and generally I try to start the new line either with
+            an operator (except assignment and equivalence - then break after), or after an opening parenthesis or bracket.
+                ex: 
+                    let thisVariableHasAVeryDescriptiveNameGreatCodeThereBuddy = 
+                        greatCode  
+                        + anArry [ 
+                            0 
+                        ]
+                        + "beautiful";
+                            
+        9.  Comments: single line comments always have a space above them and reference the code directly below them. The double-slashes are 
+            always followed by a space.
+                ex:
+                    useMeAsAnExample ( ok );
+
+                    // This is definitely a variable
+                    let variable = "no you are";
+
+
+
+
+
+
+
+
+
+
+
+
 letter (int):            the distance in semitones each letter is from C (C = 0, D = 2, E = 4, F = 5, G = 7, A = 9, B = 11)
 accidental/acdntl (int): the accidental applied to the given note (B = -2, F = -1, N = 0, S = 1, X = 2)
 distance (int):          the sum <letter + accidental>, or the total distance in semitones a given note is from C (C = 0, C# = 1, ..., Bb = 10, B = 11)
