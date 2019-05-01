@@ -13,7 +13,6 @@
     <script src="js/Controllers/modeController.js"></script>
     <script src="js/Controllers/keyController.js"></script>
     <script src="js/Controllers/chordController.js"></script>
-    <script src="js/Program/main.js"></script>
     <script src="js/Program/ui.js"></script>
 </head>
 <body>
@@ -46,37 +45,67 @@
         </div>
     </nav>
     <div id="select-panel">
-        <div id="key-div">
-            <label for="key-label">Select Key:</label>
-            <select class="music-select" name="key-select" id="key-select" onchange="updateKey ();">
-                <option value="9">A</option>
-                <option value="11">B</option>
-                <option value="0" selected="selected">C</option>
-                <option value="2">D</option>
-                <option value="4">E</option>
-                <option value="5">F</option>
-                <option value="7">G</option>
-            </select>
-            <label for="acdntl-label">Accidental:</label>
-            <select class="music-select" name="acdntl-select" id="acdntl-select" onchange="updateKey ();">
-                <option value="0"></option>
-                <option value="1">#</option>
-                <option value="-1">b</option>
-            </select>
-            <label for="mode-label">Select Scale:</label>
-            <select class="music-select" name="mode-select" id="mode-select" onchange="updateKey ();">
-                <option class="Ionian" value="0">Major (Ionian)</option>
-                <option class="Ionian" value="1">Dorian</option>
-                <option class="Ionian" value="2">Phrygian</option>
-                <option class="Ionian" value="3">Lydian</option>
-                <option class="Ionian" value="4">Mixolydian</option>
-                <option class="Ionian" value="5">Minor (Aeolian)</option>
-                <option class="Ionian" value="6">Locrian</option>
-            </select>
-        </div>
+        <!------------------------------------------------------------------------------------------------------------
+
+            Original DDL version of key selection. Likely to be replaced but I won't delete yet because there might
+            be some valuable architecture in here
+
+            <div id="key-div">
+                <label for="key-label">Select Key:</label>
+                <select class="music-select" name="key-select" id="key-select" onchange="updateKey ();">
+                    <option value="9">A</option>
+                    <option value="11">B</option>
+                    <option value="0" selected="selected">C</option>
+                    <option value="2">D</option>
+                    <option value="4">E</option>
+                    <option value="5">F</option>
+                    <option value="7">G</option>
+                </select>
+                <label for="acdntl-label">Accidental:</label>
+                <select class="music-select" name="acdntl-select" id="acdntl-select" onchange="updateKey ();">
+                    <option value="0"></option>
+                    <option value="1">#</option>
+                    <option value="-1">b</option>
+                </select>
+                <label for="mode-label">Select Scale:</label>
+                <select class="music-select" name="mode-select" id="mode-select" onchange="updateKey ();">
+                    <option class="Ionian" value="0">Major (Ionian)</option>
+                    <option class="Ionian" value="1">Dorian</option>
+                    <option class="Ionian" value="2">Phrygian</option>
+                    <option class="Ionian" value="3">Lydian</option>
+                    <option class="Ionian" value="4">Mixolydian</option>
+                    <option class="Ionian" value="5">Minor (Aeolian)</option>
+                    <option class="Ionian" value="6">Locrian</option>
+                </select>
+            </div>
+
+        ------------------------------------------------------------------------------------------------------------>       
+        <button id="button-play" style="margin-left: 400px">Play</button>
+        <ul>
+            <li>
+                <p style="display: inline">Now:</p>
+                <p style="display: inline">he</p>
+            </li>
+            <li>
+                <p style="display: inline">Then:</p>
+                <p style="display: inline" >hu</p>
+            </li>
+            <li>
+                <p style="display: inline">Later:</p>
+                <p style="display: inline">ha</p>
+            </li>
+            <li>
+                <p style="display: inline">And:</p>
+                <p style="display: inline">ho</p>
+            </li>
+        </ul>
+
+        
+        <p id="chord-display"></p>
     </div>
     <div id="display-div">
         <p id="scale-display"></p>
         <canvas id="main-canvas"></canvas>
     </div>
+    <script src="js/Program/main.js"></script>
 </body>
