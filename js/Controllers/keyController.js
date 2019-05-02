@@ -1,16 +1,35 @@
 
-// Builds scale notes by adding the steps of the input scale to the input tone
+/**
+ * Generates the notes of any key from a key center and step construction
+ * 
+ * @param {Enharmonic} keyCenter The enharmonic note on which the key will be built
+ * @param {Array} modeSteps The step construction on which the key will be built
+ *  */ 
 function generateKeyNotes ( keyCenter, modeSteps ) {
-	let keyNotes = [];
-	let currentNote = keyCenter.name + keyCenter.accidental;
-	keyNotes.push ( CHROMATIC_SCALE [ currentNote ] );
+    let keyNotes = [];
+    
+    // Get current note's value, which is at this time also our key center's value
+    let currentNote = keyCenter.name + keyCenter.accidental;
+    
+    // Push the key center as the first note of our key
+    keyNotes.push ( CHROMATIC_SCALE [ currentNote ] );
+    
+    /* Loop through the rest of the steps of the mode of our key to get the next 
+     * (now current) note. This value will be (<last note's value> + <next mode step>) % 12.
+     * We want <i < modesteps.length - 1> because the last mode step would loop us back to 
+     * the first note of the scale, which we already pushed above.
+     * For more information please read: <Link to this> */
 	for ( let i = 0; i < modeSteps.length - 1; i++ ) { 
 		currentNote = ( currentNote + modeSteps [ i ] ) % CHROMATIC_LENGTH;
 		keyNotes.push ( CHROMATIC_SCALE [ currentNote ] );
     }
-    return keyNotes.length ? keyNotes : 
-        alert ( "something went wrong in generatingScaleNotes, " 
-            + " also please replace this with proper error handling." );
+
+    // Is our key note array empty? If so, error message. Return the array.
+    if ( !keyNotes.length ) {
+        alert ( "something went wrong in generatingScaleChords, " 
+        + "also please replace this with proper error handling." );
+    }
+    return keyNotes;
 }
 
 /*
